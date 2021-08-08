@@ -6,12 +6,20 @@ timer()
 
 
 翻卡（）
-open the first card - card stay open
-open second card  	- if same as the previous, two cards stay open, update score 
+cardFlipNum,
+cardPairNum,
+card
+
+open the first card 	- card stay open
+
+open second card  	- if same as the previous, two cards stay open, update score， 
 		- if different after 1s two cards flip back
 		- if cliked the first one 
 
 open third card 	- if cliked flipped 
+		- if
+
+
 判定第几张牌
 判定是否一样
 

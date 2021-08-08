@@ -50,22 +50,27 @@ function setGame() {
 
 function startGame() {
   game.startButton.addEventListener('click',function(){
-    if(game.startButton.innerHTML === 'Start Game'){
-      game.startButton.innerHTML = 'End Game';
-     
+    if(game.startButton.innerHTML === 'New Game'){
       firstLevel();
       //secondLevel();
       //handleCardFlip();
       levelPass();
+      game.startButton.innerHTML = 'End Game';
+     
+
     }
 
     else if(game.startButton.innerHTML === 'End Game')
     {
+  
       //seperate for game over or timeout
       alert('Congratulations, your score is'+ game.score);
       game.startButton.innerHTML = 'New Game';
+      
+      clearInterval(game.timerInterval);
+      
+
     }
-  
     else {
       game.startButton.innerHTML = 'Start Game';
     }
@@ -106,8 +111,7 @@ function secondLevel(){
   gameBoard.style = 'grid-template-columns: repeat(4, 1fr)';
   gameBoard.innerHTML = null;
   gameBoard.append(
-    createCards('css3'),
-    createCards('html5'),
+  
     createCards('js'),
     createCards('sass'),
     createCards('nodejs'),
@@ -118,8 +122,7 @@ function secondLevel(){
     createCards('aws'),
   )
   createCardCopy();
-  shuffle();
-  updateTimerDisplay();
+ // shuffle();
 }
 
 function thirdLevel(){
@@ -135,11 +138,20 @@ function thirdLevel(){
     createCards('heroku'),
     createCards('github'),
     createCards('aws'),
+    createCards('css3'),
+    createCards('html5'),
+    createCards('js'),
+    createCards('sass'),
+    createCards('nodejs'),
+    createCards('react'),
+    createCards('linkedin'),
+    createCards('heroku'),
+    createCards('github'),
+    createCards('aws'),
+
   )
   createCardCopy();
   shuffle();
-  updateTimerDisplay();
-
 }
 
 
@@ -156,8 +168,9 @@ function createCardCopy() {
 function handleCardFlip() {
   let fliped = {};
   let card = document.querySelectorAll('.card');
-  
+
     card.forEach((card)=>{
+ 
       card.addEventListener('click', function(){
        
         if(game.cardFlipNum === 0 && !card.classList.contains('done')){
@@ -199,19 +212,21 @@ function handleCardFlip() {
 function nextLevel(){
   if(game.level === 1 && game.cardPairNum === 2){
     setTimeout(()=>{
-      secondLevel();
+      //secondLevel();
+      thirdLevel();
       updateLevel();
       handleCardFlip();
-      game.timer= 60;
-      //updateTimerDisplay();
+      updateTimerDisplay();
     },1500)
   }else if(game.level === 2 && game.cardPairNum === 8){
     setTimeout(()=>{
       thirdLevel();
       updateLevel();
       handleCardFlip();
+
+      updateTimerDisplay();
     },1500)
-    game.timer = 60;
+    
   }
 
 }
@@ -233,13 +248,12 @@ function levelPass(){
   if(game.level ===3){
 
   }
-
 }
 
 function shuffle(){
   const card = document.querySelectorAll('.card');
   card.forEach(card => {
-    let randomPos = Math.floor(Math.random() * 16);
+    let randomPos = Math.floor(Math.random() * 36);
     card.style.order = randomPos;
   });
 }
@@ -263,17 +277,22 @@ function updateLevel(){
 
 function updateTimerDisplay() {
   //clearInterval(game.timer);
-  timer = setInterval(() => {
-    game.timer--;
-    if(game.timer <= 0){
-      clearInterval(timer);
-      
-      alert('Time out, your score is'+ game.scoreDisplay);
-      game.startButton.innerHTML = 'New Game';
+  let{timer, timerDisplay} = game;
+  clearInterval(game.timerInterval);
+  game.timerInterval = setInterval(() => {
+  
+    if(timer > 0){
+      timer -= 1;
+      timerDisplay.innerHTML = timer;
     }
-    game.timerDisplay.innerHTML = game.timer;
-    console.log(game.timer);
+    //timerDisplay.innerHTML = timer;
+    
+    console.log(timer);
+    //alert('Time out, your score is'+ game.scoreDisplay);
+    //game.startButton.innerHTML = 'New Game';
   }, 1000);
+  
+  //clearInterval(timer);
 }
 
 /*******************************************
