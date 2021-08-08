@@ -1,0 +1,28 @@
+start button()
+
+
+timer()
+
+
+
+翻卡（）
+open the first card - card stay open
+open second card  	- if same as the previous, two cards stay open, update score 
+		- if different after 1s two cards flip back
+		- if cliked the first one 
+
+open third card 	- if cliked flipped 
+判定第几张牌
+判定是否一样
+
+
+level 判定
+ -first time - press start game button - get level 1 
+ - level 1
+
+
+
+判定是否过关（）
+ - level 1  - 配对数量 2 or 所有的card 都有success class
+ - level 2  - 配对数量 8 or 所有的card 都有success class
+ - level 3  - 配对数量 18 or 所有的card 都有success class
