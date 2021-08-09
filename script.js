@@ -52,7 +52,7 @@ function setGame() {
     if (startButton.innerHTML === 'End Game'){
    
       clearInterval(game.timerInterval);
-      //handleGameOver();
+      
       GameOver();
       startButton.innerHTML = 'Start Game';
       
@@ -86,6 +86,7 @@ function startGame() {
   resetGame();
   firstLevel();
   handleCardFlip();
+  updateTimerDisplay();
 }
 
 function handleCardFlip() {
@@ -134,17 +135,27 @@ function passLevel(){
     setTimeout(()=>{
       secondLevel();
       updateLevel();
+      clearInterval(game.timerInterval);
+      game.timerDisplay.innerHTML = 60;
+      updateTimerDisplay();
+      game.cardPairNum = 0;
       handleCardFlip();
+
     },1500)
   }else if(game.level ===2 && game.cardPairNum === 8){
     setTimeout(()=>{
       thirdLevel();
       updateLevel();
+      clearInterval(game.timerInterval);
+      game.timerDisplay.innerHTML = 60;
+      updateTimerDisplay();
+      game.cardPairNum = 0;
       handleCardFlip();
     },1500)
   }
   else if(game.level === 3 && game.cardPairNum === 18){
     handleGameOver();
+    clearInterval(game.timerInterval);
   }
 }
 
@@ -243,15 +254,15 @@ function updateScore() {
 }
 
 function updateTimerDisplay() {
-  let {timer, timerDisplay,timerInterval} = game;
+  let {timer, timerDisplay} = game;
   let time = timer;
-  clearInterval(timerInterval);
-  timerInterval = setInterval(function (){
+  clearInterval(game.timerInterval);
+  game.timerInterval= setInterval(function (){
     if(time > 0){
       time -= 1;
       timerDisplay.innerHTML = time;
     }else{
-    clearInterval(timerInterval);
+    clearInterval(game.timerInterval);
     alert('Time out!');
     }
   },1000); 
@@ -270,6 +281,7 @@ function resetGame(){
   game.level = 1;
   game.levelDisplay.innerHTML = game.level;
   game.timerInterval= null;
+  game.timerDisplay.innerHTML = 60;
 }
 
 /*******************************************
