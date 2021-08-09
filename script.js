@@ -50,44 +50,25 @@ function setGame() {
 
   startButton.addEventListener('click',() =>{
     if (startButton.innerHTML === 'End Game'){
-   
       clearInterval(game.timerInterval);
-      
       GameOver();
       startButton.innerHTML = 'Start Game';
-      
-      console.log(1,startButton.innerHTML )
+      //console.log(1,startButton.innerHTML )
+   }else if (startButton.innerHTML === 'Start Game'){
+      startButton.innerHTML = 'End Game';
+      firstLevel();
+      handleCardFlip();
+      updateTimerDisplay();
    }else if(startButton.innerHTML === 'New Game'){
       startButton.innerHTML = 'End Game';
       updateTimerDisplay();
       firstLevel();
       handleCardFlip();
-   }else{
-        //updateTimerDisplay();
-        startButton.innerHTML = 'End Game';
-        startGame();
-
-        console.log(2,startButton.innerHTML )
-       // handleCardFlip();
-       
-     }
+   }
   })
 }
 
-function startGame() {
-  let card = document.querySelectorAll('.card');
-  card.forEach(card => {
-    card.classList.remove('done');
-  });
-  const { startButton } = game;
-  clearInterval(game.timerInterval);
-  //startButton.innerHTML = 'Start Game';
-  setGame();
-  resetGame();
-  firstLevel();
-  handleCardFlip();
-  updateTimerDisplay();
-}
+
 
 function handleCardFlip() {
   let cards = document.querySelectorAll('.card');
@@ -129,14 +110,12 @@ function handleCardFlip() {
   })
 }
 
-
 function passLevel(){
   if(game.level === 1 && game.cardPairNum === 2){
     setTimeout(()=>{
       secondLevel();
       updateLevel();
       clearInterval(game.timerInterval);
-      game.timerDisplay.innerHTML = 60;
       updateTimerDisplay();
       game.cardPairNum = 0;
       handleCardFlip();
@@ -147,7 +126,6 @@ function passLevel(){
       thirdLevel();
       updateLevel();
       clearInterval(game.timerInterval);
-      game.timerDisplay.innerHTML = 60;
       updateTimerDisplay();
       game.cardPairNum = 0;
       handleCardFlip();
@@ -254,8 +232,10 @@ function updateScore() {
 }
 
 function updateTimerDisplay() {
+
   let {timer, timerDisplay} = game;
   let time = timer;
+  game.timerDisplay.innerHTML = 60;
   clearInterval(game.timerInterval);
   game.timerInterval= setInterval(function (){
     if(time > 0){

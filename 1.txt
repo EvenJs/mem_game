@@ -34,3 +34,52 @@ level 判定
  - level 1  - 配对数量 2 or 所有的card 都有success class
  - level 2  - 配对数量 8 or 所有的card 都有success class
  - level 3  - 配对数量 18 or 所有的card 都有success class
+
+
+
+
+
+
+
+
+
+
+
+
+
+function
+startGame()
+
+handleCardFlip()
+
+generate level()
+nextLevel() 判定过关
+
+createCards()
+createCardsCopy()
+shuffle() 洗牌
+
+
+
+button
+- 初始为 new game - 点击开始游戏level1 - button变为end game
+- 点击end game - 弹出alter（分数）- 点击alter button 变为 start game
+
+- 点击 start game - 开始新的游戏 - button变为end game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
