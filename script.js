@@ -80,14 +80,14 @@ function handleCardFlip() {
       if(cardFlipNum === 0 && !card.classList.contains('done')) {
         card.classList.add('card--flipped','done');
         fliped[cardFlipNum] = card;
-        console.log(cardFlipNum);
+        //console.log(cardFlipNum);
         cardFlipNum = 1;
 
       }
       if(cardFlipNum ===1 && !card.classList.contains('done')){
         card.classList.add('card--flipped','done');
         fliped[cardFlipNum] = card;
-        console.log(cardFlipNum);
+        //console.log(cardFlipNum);
         cardFlipNum = 2;
         
         // check two card same or not by data-tech 
@@ -137,10 +137,8 @@ function passLevel(){
   }
 }
 
-function nextLevel() {}
-
 function GameOver() {
-  alert('Congratulations, your score is')
+  alert('Congratulations, your score is ' +`${game.score}`)
   game.level = 1;
   game.score = 0;
   resetGame();
@@ -148,6 +146,7 @@ function GameOver() {
   card.forEach(card => {
     card.classList.add('done');
   });
+  game.startButton.innerHTML='Start Game';
 }
 
 function createCards(className){
@@ -242,8 +241,15 @@ function updateTimerDisplay() {
       time -= 1;
       timerDisplay.innerHTML = time;
     }else{
-    clearInterval(game.timerInterval);
-    alert('Time out!');
+      clearInterval(game.timerInterval);
+      alert('time out!');
+      game.startButton.innerHTML='Start Game';
+      resetGame();
+      let card = document.querySelectorAll('.card');
+      card.forEach(card => {
+        card.classList.add('done');
+      });
+      //break;
     }
   },1000); 
 }
